@@ -1,0 +1,4 @@
+#!/bin/sh
+
+now=$(date +"%s_%Y-%m-%d")
+/usr/bin/mysqldump --opt -h 172.20.0.10 -u ${MYSQL_USER} -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} > "./backup/${now}_dump.sql"

@@ -51,6 +51,31 @@ services:
       - MYSQL_ROOT_HOST="%"
     restart: on-failure
 
+  cron:
+    image: schnitzler/mysqldump
+    networks:
+      backend:
+        ipv4_address: 172.20.0.15
+    volumes:
+      #- /opt/bin/crontab:/var/spool/cron/crontabs/root
+      - ./backup:/usr/local/bin/backup
+    volumes_from:
+      - backup
+    command: ["-l", "8", "-d", "8"]
+    environment:
+      - MYSQL_HOST=172.20.0.10
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  backup:
+    image: busybox
+    networks:
+      backend:
+        ipv4_address: 172.20.0.20
+    volumes:
+      - ./backup:/backup
+    restart: always
+
 networks:
   backend:
     driver: bridge

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Скрипт для запуска на новой машине 4 сервиса
+
 # Проверка прав администратора
 if [ "$(id -u)" != "0" ]; then
   echo "Этот скрипт должен выполняться от имени root"
@@ -24,6 +26,6 @@ fi
 docker compose up -d
 
 docker ps -a
-curl http://localhost:8090
+#curl http://localhost:8090
 
 exit 0

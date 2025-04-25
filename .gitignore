@@ -2,6 +2,8 @@
 schema.pdf
 
 main_venv.py
-venv/
 not_tested_main.py
 .dockerignore
+
+venv/
+backup/
